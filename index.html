@@ -3,263 +3,519 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lzaz Sports — Your next football match is already nearby</title>
-  <meta name="description" content="Lzaz Sports helps players create matches, find nearby footballers, build teams, and challenge rivals — all in one simple app." />
-  <meta name="theme-color" content="#0A0F0D" />
+  <title>Lzaz Sports — Find your next match</title>
+  <meta name="description" content="Create pickup games, find nearby players, build your team, and challenge rivals — all from one simple football app." />
+  <meta name="theme-color" content="#252522" />
 
-  <meta property="og:title" content="Lzaz Sports — Your next football match is already nearby" />
-  <meta property="og:description" content="Create matches, find nearby footballers, build teams, and challenge rivals — all in one simple app." />
+  <meta property="og:title" content="Lzaz Sports — Find your next match" />
+  <meta property="og:description" content="Create pickup games, find nearby players, build your team, and challenge rivals — all from one simple football app." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://tazweedapp.github.io/lzaz-legal/" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
-    :root {
-      --bg: #0A0F0D;
-      --card: #121C18;
-      --card-line: rgba(255,255,255,0.07);
-      --green: #00E676;
-      --green-deep: #00B45A;
-      --green-glow: rgba(0,230,118,0.35);
-      --text: #F2F5F3;
-      --muted: #9BA8A2;
-      --muted-2: #6E7C76;
-      --maxw: 1080px;
+    /*
+      Lzaz Sports — official brand identity
+      Display font: DDC Hardware (preferred). Drop the font file into the repo
+      and uncomment the @font-face block below; the page already prefers it.
+    */
+    /*
+    @font-face {
+      font-family: 'DDC Hardware';
+      src: url('fonts/DDCHardware.woff2') format('woff2'),
+           url('fonts/DDCHardware.woff') format('woff');
+      font-weight: 400 700;
+      font-display: swap;
     }
+    */
+
+    :root {
+      --gold: #FFD23F;
+      --gold-olive: #9A8A3A;
+      --charcoal: #252522;
+      --charcoal-2: #2E2E2A;
+      --charcoal-3: #383834;
+      --offwhite: #FAF9F3;
+      --ink-muted: #6B6A63;
+      --on-dark: rgba(250,249,243,0.72);
+      --line-light: rgba(37,37,34,0.10);
+      --line-dark: rgba(250,249,243,0.12);
+      --radius: 18px;
+      --maxw: 1120px;
+      --font-display: 'DDC Hardware', 'Oswald', 'Arial Narrow', sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { -webkit-text-size-adjust: 100%; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--bg); color: var(--text); line-height: 1.6;
-      min-height: 100vh; display: flex; flex-direction: column;
+      font-family: var(--font-body);
+      background: var(--offwhite); color: var(--charcoal); line-height: 1.6;
       overflow-x: hidden; -webkit-font-smoothing: antialiased;
     }
-    h1, h2, h3, .logo { font-family: 'Sora', sans-serif; letter-spacing: -0.02em; }
+    h1, h2, h3, .display, .eyebrow, .tag, .logo-text, .num, .store .lbl b {
+      font-family: var(--font-display); letter-spacing: 0.01em;
+    }
     a { color: inherit; text-decoration: none; }
     .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
 
-    /* store badges */
+    /* ---- buttons / store badges ---- */
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px; cursor: pointer; border: none;
+      font-family: var(--font-display); font-size: 1rem; font-weight: 600; letter-spacing: 0.03em;
+      text-transform: uppercase; padding: 12px 22px; border-radius: 999px;
+      background: var(--gold); color: var(--charcoal);
+      box-shadow: 0 8px 24px rgba(255,210,63,0.35); transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(255,210,63,0.45); }
+
     .stores { display: flex; flex-wrap: wrap; gap: 14px; }
     .store {
-      display: inline-flex; align-items: center; gap: 11px;
-      background: #fff; color: #000; padding: 11px 18px 11px 16px; border-radius: 14px;
-      transition: transform .18s ease, box-shadow .18s ease; box-shadow: 0 6px 22px rgba(0,0,0,0.4);
+      display: inline-flex; align-items: center; gap: 11px; padding: 11px 18px 11px 15px;
+      border-radius: 14px; transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
     }
-    .store:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.5); }
     .store svg { width: 26px; height: 26px; flex: 0 0 auto; }
-    .store .lbl { display: flex; flex-direction: column; line-height: 1.15; }
-    .store .lbl small { font-size: 0.66rem; opacity: 0.7; }
-    .store .lbl b { font-size: 1.02rem; font-weight: 700; font-family: 'Sora', sans-serif; }
+    .store .lbl { display: flex; flex-direction: column; line-height: 1.1; text-align: left; }
+    .store .lbl small { font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.7; font-family: var(--font-body); }
+    .store .lbl b { font-size: 1.05rem; font-weight: 600; letter-spacing: 0.02em; }
+    .store.solid { background: var(--gold); color: var(--charcoal); box-shadow: 0 8px 24px rgba(255,210,63,0.32); }
+    .store.solid:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(255,210,63,0.42); }
+    .store.line { background: transparent; color: var(--offwhite); border: 1.5px solid var(--line-dark); }
+    .store.line:hover { transform: translateY(-2px); border-color: var(--gold); }
+    .store.dark { background: var(--charcoal); color: var(--offwhite); }
+    .store.dark:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(37,37,34,0.3); }
 
-    .btn {
-      display: inline-flex; align-items: center; gap: 9px; font-weight: 600; font-size: 0.95rem;
-      padding: 11px 20px; border-radius: 999px; border: none; cursor: pointer;
-      background: linear-gradient(135deg, var(--green), var(--green-deep)); color: #04140C;
-      box-shadow: 0 8px 26px var(--green-glow); transition: transform .18s ease, box-shadow .18s ease;
-    }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 38px var(--green-glow); }
+    /* ---- badge / starburst marks ---- */
+    .logo { display: flex; align-items: center; gap: 11px; }
+    .logo-mark { width: 38px; height: 38px; flex: 0 0 auto; }
+    .logo-text { font-size: 1.35rem; font-weight: 700; line-height: 1; text-transform: uppercase; }
+    .logo-text b { color: var(--charcoal); }
+    .logo-text span { display: block; font-size: 0.6rem; letter-spacing: 0.34em; color: var(--gold-olive); font-weight: 600; }
 
     /* ===== HEADER ===== */
     header {
-      position: sticky; top: 0; z-index: 50;
-      background: rgba(10,15,13,0.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--card-line);
+      position: sticky; top: 0; z-index: 60; background: rgba(250,249,243,0.85);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line-light);
     }
-    .nav { display: flex; align-items: center; justify-content: space-between; height: 66px; }
-    .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.2rem; }
-    .logo-mark {
-      width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; color: #04140C;
-      background: linear-gradient(135deg, var(--green), var(--green-deep)); box-shadow: 0 4px 16px var(--green-glow);
-    }
-    .logo-mark svg { width: 19px; height: 19px; }
-    .logo span { color: var(--green); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 20px; }
+    .nav-links { display: flex; gap: 30px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; font-family: var(--font-display); }
+    .nav-links a { color: var(--charcoal); opacity: 0.75; }
+    .nav-links a:hover { opacity: 1; color: var(--gold-olive); }
 
-    /* ===== HERO (the whole page) ===== */
-    .hero { position: relative; flex: 1; padding: 56px 0 40px; overflow: hidden; }
-    .hero-bg {
-      position: absolute; inset: 0; z-index: 0;
-      background:
-        radial-gradient(900px 500px at 75% -5%, rgba(0,230,118,0.16), transparent 60%),
-        radial-gradient(700px 500px at 5% 25%, rgba(0,180,90,0.10), transparent 55%);
-    }
-    .hero-bg::after {
-      content: ""; position: absolute; inset: 0;
+    /* ===== HERO ===== */
+    .hero { position: relative; background: var(--charcoal); color: var(--offwhite); overflow: hidden; padding: 86px 0 96px; }
+    .hero .pitch {
+      position: absolute; inset: 0; z-index: 0; opacity: 0.5;
       background-image:
-        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-      background-size: 60px 60px;
-      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 25%, #000 30%, transparent 75%);
-      mask-image: radial-gradient(ellipse 70% 60% at 50% 25%, #000 30%, transparent 75%);
+        linear-gradient(rgba(250,249,243,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(250,249,243,0.05) 1px, transparent 1px);
+      background-size: 68px 68px;
+      -webkit-mask-image: radial-gradient(ellipse 75% 70% at 60% 25%, #000 25%, transparent 78%);
+      mask-image: radial-gradient(ellipse 75% 70% at 60% 25%, #000 25%, transparent 78%);
     }
-    .hero .wrap { position: relative; z-index: 2; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; }
+    .hero .burst {
+      position: absolute; z-index: 0; width: 760px; height: 760px; top: -260px; right: -200px;
+      background: radial-gradient(circle at 50% 50%, rgba(255,210,63,0.20), rgba(255,210,63,0.04) 42%, transparent 64%);
+      pointer-events: none;
+    }
+    .hero .center-circle {
+      position: absolute; z-index: 0; left: -130px; bottom: -130px; width: 320px; height: 320px;
+      border: 2px solid rgba(250,249,243,0.06); border-radius: 50%;
+    }
+    .hero .wrap { position: relative; z-index: 2; display: grid; grid-template-columns: 1.04fr 0.96fr; gap: 56px; align-items: center; }
     .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 600;
-      letter-spacing: 0.04em; text-transform: uppercase; color: var(--green);
-      background: rgba(0,230,118,0.08); border: 1px solid rgba(0,230,118,0.2);
-      padding: 6px 13px; border-radius: 999px; margin-bottom: 22px;
+      display: inline-flex; align-items: center; gap: 9px; font-size: 0.82rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 22px;
     }
-    .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green); }
-    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); line-height: 1.05; font-weight: 800; }
-    .hero h1 em { font-style: normal; color: var(--green); }
-    .hero p.sub { margin-top: 20px; font-size: 1.08rem; color: var(--muted); max-width: 500px; }
-    .hero .ctas { margin-top: 30px; }
+    .eyebrow::before { content: ""; width: 26px; height: 2px; background: var(--gold); display: inline-block; }
+    .hero h1 { font-size: clamp(2.9rem, 7vw, 5rem); line-height: 0.96; font-weight: 700; text-transform: uppercase; }
+    .hero h1 .y { color: var(--gold); }
+    .hero p.sub { margin-top: 22px; font-size: 1.15rem; color: var(--on-dark); max-width: 480px; }
+    .hero .ctas { margin-top: 34px; }
+    .hero .trust { margin-top: 26px; display: flex; align-items: center; gap: 12px; font-size: 0.84rem; color: var(--on-dark); }
+    .hero .trust .stars { color: var(--gold); letter-spacing: 3px; }
 
-    /* compact feature row */
-    .feat-row { margin-top: 34px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 26px; max-width: 500px; }
-    .feat { display: flex; align-items: flex-start; gap: 11px; }
-    .feat .ic {
-      width: 36px; height: 36px; border-radius: 10px; flex: 0 0 auto; display: grid; place-items: center;
-      color: var(--green); background: rgba(0,230,118,0.1); border: 1px solid rgba(0,230,118,0.2);
-    }
-    .feat .ic svg { width: 19px; height: 19px; }
-    .feat b { font-family: 'Sora'; font-weight: 600; font-size: 0.92rem; display: block; }
-    .feat small { color: var(--muted-2); font-size: 0.8rem; line-height: 1.35; }
-
-    /* phone mockup */
-    .phone-stage { position: relative; display: grid; place-items: center; }
-    .glow-ball { position: absolute; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle at 50% 40%, var(--green-glow), transparent 65%); filter: blur(10px); z-index: 0; }
+    /* phone / app preview */
+    .preview { position: relative; display: grid; place-items: center; }
+    .preview .ring { position: absolute; width: 360px; height: 360px; border-radius: 50%; background: radial-gradient(circle, rgba(255,210,63,0.18), transparent 62%); filter: blur(6px); }
     .phone {
-      position: relative; z-index: 2; width: 248px; height: 506px;
-      background: #060A08; border-radius: 40px; border: 2px solid rgba(255,255,255,0.12);
-      box-shadow: 0 40px 90px rgba(0,0,0,0.6), inset 0 0 0 6px #0c1310; padding: 11px; overflow: hidden;
+      position: relative; z-index: 2; width: 286px; border-radius: 34px; padding: 16px;
+      background: linear-gradient(165deg, var(--charcoal-2), var(--charcoal));
+      border: 1px solid var(--line-dark);
+      box-shadow: 0 40px 90px rgba(0,0,0,0.5);
     }
-    .phone .notch { position: absolute; top: 13px; left: 50%; transform: translateX(-50%); width: 104px; height: 22px; background: #060A08; border-radius: 0 0 15px 15px; z-index: 3; }
-    .screen { width: 100%; height: 100%; border-radius: 30px; overflow: hidden; background: linear-gradient(160deg, #0E1A14, #0A0F0D); position: relative; display: flex; flex-direction: column; }
-    .screen-top { padding: 32px 16px 12px; }
-    .screen-top .hi { font-size: 0.7rem; color: var(--muted-2); }
-    .screen-top .name { font-family: 'Sora'; font-weight: 700; font-size: 1.1rem; }
-    .match-card { margin: 8px 14px; padding: 13px; border-radius: 15px; background: linear-gradient(135deg, rgba(0,230,118,0.14), rgba(0,230,118,0.03)); border: 1px solid rgba(0,230,118,0.22); }
-    .match-card .when { font-size: 0.66rem; color: var(--green); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
-    .match-card .title { font-family: 'Sora'; font-weight: 700; font-size: 0.98rem; margin: 4px 0 8px; }
-    .match-card .row { display: flex; align-items: center; justify-content: space-between; font-size: 0.72rem; color: var(--muted); }
-    .pill { background: rgba(255,255,255,0.06); padding: 3px 9px; border-radius: 999px; font-size: 0.66rem; }
+    .app-head { display: flex; align-items: center; justify-content: space-between; padding: 4px 4px 14px; }
+    .app-head .who small { font-size: 0.64rem; color: var(--on-dark); text-transform: uppercase; letter-spacing: 0.1em; }
+    .app-head .who b { font-family: var(--font-display); font-size: 1.05rem; color: var(--offwhite); display: block; }
+    .app-head .badge-ic { width: 30px; height: 30px; }
+    .tonight {
+      border-radius: 18px; overflow: hidden; border: 1px solid rgba(255,210,63,0.3);
+      background: linear-gradient(160deg, rgba(255,210,63,0.16), rgba(255,210,63,0.03));
+    }
+    .tonight .banner { background: var(--gold); color: var(--charcoal); padding: 7px 14px; font-family: var(--font-display); font-weight: 600; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; display: flex; justify-content: space-between; }
+    .tonight .body { padding: 14px; }
+    .tonight .ttl { font-family: var(--font-display); font-weight: 700; font-size: 1.45rem; color: var(--offwhite); text-transform: uppercase; line-height: 1; }
+    .tonight .meta { margin-top: 8px; display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--on-dark); }
+    .tonight .meta svg { width: 14px; height: 14px; color: var(--gold); }
+    .tonight .joined { margin-top: 14px; display: flex; align-items: center; justify-content: space-between; }
     .avatars { display: flex; }
-    .avatars i { width: 21px; height: 21px; border-radius: 50%; display: inline-block; border: 2px solid #0E1A14; margin-left: -7px; background: linear-gradient(135deg, var(--green), var(--green-deep)); }
+    .avatars i { width: 24px; height: 24px; border-radius: 50%; display: inline-block; border: 2px solid var(--charcoal-2); margin-left: -8px; background: linear-gradient(135deg, var(--gold), var(--gold-olive)); }
     .avatars i:first-child { margin-left: 0; }
-    .mini-card { margin: 0 14px 8px; padding: 10px 13px; border-radius: 13px; background: rgba(255,255,255,0.04); border: 1px solid var(--card-line); display: flex; align-items: center; justify-content: space-between; font-size: 0.76rem; }
-    .mini-card .badge { color: var(--green); font-weight: 600; font-size: 0.7rem; }
-    .screen-nav { margin-top: auto; display: flex; justify-content: space-around; padding: 13px 0 16px; border-top: 1px solid var(--card-line); background: rgba(0,0,0,0.2); }
-    .screen-nav i { width: 21px; height: 21px; border-radius: 7px; background: rgba(255,255,255,0.12); }
-    .screen-nav i.active { background: var(--green); box-shadow: 0 0 12px var(--green-glow); }
+    .avatars .more { width: 24px; height: 24px; border-radius: 50%; margin-left: -8px; background: var(--charcoal-3); color: var(--offwhite); font-size: 0.6rem; display: grid; place-items: center; border: 2px solid var(--charcoal-2); font-weight: 700; }
+    .joined .lbl2 { font-size: 0.72rem; color: var(--on-dark); }
+    .challenge-btn { margin-top: 13px; width: 100%; text-align: center; padding: 11px; border-radius: 13px; background: var(--gold); color: var(--charcoal); font-family: var(--font-display); font-weight: 600; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .app-nav { margin-top: 14px; display: flex; justify-content: space-around; padding-top: 13px; border-top: 1px solid var(--line-dark); }
+    .app-nav i { width: 22px; height: 22px; border-radius: 7px; background: rgba(250,249,243,0.14); }
+    .app-nav i.on { background: var(--gold); }
+
+    /* ===== VALUE STRIP ===== */
+    .value { background: var(--offwhite); padding: 64px 0; }
+    .value .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .vcard {
+      position: relative; background: #fff; border: 1px solid var(--line-light); border-radius: var(--radius);
+      padding: 26px 22px; transition: transform .18s ease, box-shadow .18s ease;
+      box-shadow: 0 6px 20px rgba(37,37,34,0.04);
+    }
+    .vcard:hover { transform: translateY(-4px); box-shadow: 0 16px 38px rgba(37,37,34,0.10); }
+    .vcard .b-ic {
+      width: 52px; height: 52px; margin-bottom: 16px; display: grid; place-items: center; color: var(--charcoal);
+    }
+    .vcard .b-ic svg { width: 52px; height: 52px; }
+    .vcard h3 { font-size: 1.3rem; font-weight: 700; text-transform: uppercase; }
+    .vcard p { font-size: 0.9rem; color: var(--ink-muted); margin-top: 4px; }
+
+    /* ===== SECTION SHELL ===== */
+    section.block { padding: 96px 0; }
+    .head { max-width: 680px; margin: 0 auto 54px; text-align: center; }
+    .tag { display: inline-block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-olive); margin-bottom: 12px; }
+    .head h2 { font-size: clamp(2rem, 4.4vw, 3rem); font-weight: 700; text-transform: uppercase; line-height: 1.04; }
+    .head p { margin-top: 16px; color: var(--ink-muted); font-size: 1.08rem; }
+
+    /* ===== PROBLEM ===== */
+    .problem { background: var(--offwhite); }
+    .problem .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    .problem h2 { font-size: clamp(2rem, 4.4vw, 2.9rem); font-weight: 700; text-transform: uppercase; line-height: 1.05; }
+    .problem h2 .u { box-shadow: inset 0 -0.32em 0 rgba(255,210,63,0.55); }
+    .problem p { margin-top: 20px; color: var(--ink-muted); font-size: 1.1rem; max-width: 500px; }
+    .chat { display: flex; flex-direction: column; gap: 10px; }
+    .bubble { max-width: 82%; padding: 11px 15px; border-radius: 16px; font-size: 0.92rem; background: #fff; border: 1px solid var(--line-light); color: var(--ink-muted); }
+    .bubble.me { align-self: flex-end; background: rgba(255,210,63,0.16); border-color: rgba(255,210,63,0.4); color: var(--charcoal); }
+    .bubble.dim { opacity: 0.6; }
+    .chat .tagline { align-self: center; font-size: 0.74rem; color: var(--ink-muted); }
+    .chat .solved { margin-top: 14px; display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 14px; background: var(--charcoal); color: var(--offwhite); font-weight: 600; }
+    .chat .solved svg { width: 22px; height: 22px; color: var(--gold); flex: 0 0 auto; }
+
+    /* ===== FEATURES ===== */
+    .features { background: var(--charcoal); color: var(--offwhite); }
+    .features .head h2 { color: var(--offwhite); }
+    .features .head .tag { color: var(--gold); }
+    .features .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .fcard {
+      position: relative; background: var(--charcoal-2); border: 1px solid var(--line-dark); border-radius: var(--radius);
+      padding: 30px; overflow: hidden; transition: transform .18s ease, border-color .18s ease;
+    }
+    .fcard:hover { transform: translateY(-4px); border-color: rgba(255,210,63,0.4); }
+    .fcard .fic { width: 54px; height: 54px; border-radius: 14px; display: grid; place-items: center; color: var(--gold); background: rgba(255,210,63,0.12); border: 1px solid rgba(255,210,63,0.25); margin-bottom: 18px; }
+    .fcard .fic svg { width: 27px; height: 27px; }
+    .fcard h3 { font-size: 1.35rem; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
+    .fcard p { color: var(--on-dark); font-size: 0.98rem; }
+
+    /* ===== HOW IT WORKS ===== */
+    .how { background: var(--offwhite); }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .step { text-align: center; padding: 34px 24px; background: #fff; border: 1px solid var(--line-light); border-radius: var(--radius); box-shadow: 0 6px 20px rgba(37,37,34,0.04); }
+    .step .num { width: 60px; height: 60px; margin: 0 auto 20px; display: grid; place-items: center; font-size: 1.6rem; font-weight: 700; color: var(--charcoal); background: var(--gold); border-radius: 50%; box-shadow: 0 8px 22px rgba(255,210,63,0.4); }
+    .step h3 { font-size: 1.2rem; font-weight: 700; text-transform: uppercase; }
+
+    /* ===== FINAL CTA ===== */
+    .final { padding: 0 0 96px; }
+    .final .panel {
+      position: relative; overflow: hidden; text-align: center; border-radius: 28px;
+      padding: 72px 40px; background: var(--gold); color: var(--charcoal);
+    }
+    .final .panel .pitch2 {
+      position: absolute; inset: 0; opacity: 0.5;
+      background-image: linear-gradient(rgba(37,37,34,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(37,37,34,0.06) 1px, transparent 1px);
+      background-size: 56px 56px;
+      -webkit-mask-image: radial-gradient(ellipse 70% 80% at 50% 50%, #000 30%, transparent 80%);
+      mask-image: radial-gradient(ellipse 70% 80% at 50% 50%, #000 30%, transparent 80%);
+    }
+    .final .panel > * { position: relative; z-index: 2; }
+    .final h2 { font-size: clamp(2.1rem, 5vw, 3.2rem); font-weight: 700; text-transform: uppercase; line-height: 1.02; }
+    .final p { margin-top: 14px; font-size: 1.12rem; max-width: 460px; margin-left: auto; margin-right: auto; opacity: 0.82; }
+    .final .ctas { margin-top: 30px; display: flex; justify-content: center; }
 
     /* ===== FOOTER ===== */
-    footer { border-top: 1px solid var(--card-line); padding: 22px 0; background: var(--bg); }
-    .foot { display: flex; align-items: center; justify-content: space-between; gap: 16px 28px; flex-wrap: wrap; font-size: 0.88rem; color: var(--muted-2); }
-    .foot-links { display: flex; gap: 22px; flex-wrap: wrap; }
-    .foot-links a { color: var(--muted); }
-    .foot-links a:hover { color: var(--green); }
+    footer { background: var(--charcoal); color: var(--offwhite); padding: 56px 0 36px; }
+    .foot-grid { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+    .footer-brand { max-width: 320px; }
+    .footer-brand .logo-text b { color: var(--offwhite); }
+    .footer-brand p { margin-top: 14px; color: var(--on-dark); font-size: 0.92rem; }
+    .foot-cols { display: flex; gap: 60px; flex-wrap: wrap; }
+    .foot-col h4 { font-family: var(--font-display); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .foot-col a { display: block; color: var(--on-dark); font-size: 0.94rem; margin-bottom: 10px; }
+    .foot-col a:hover { color: var(--gold); }
+    .foot-bottom { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line-dark); color: var(--on-dark); font-size: 0.84rem; }
 
     /* ===== RESPONSIVE ===== */
-    @media (max-width: 880px) {
-      .hero { padding: 40px 0 32px; }
-      .hero .wrap { grid-template-columns: 1fr; gap: 44px; }
-      .phone-stage { order: -1; }
-      .feat-row { max-width: none; }
-      .foot { justify-content: center; text-align: center; }
+    @media (max-width: 900px) {
+      .hero { padding: 64px 0 72px; }
+      .hero .wrap { grid-template-columns: 1fr; gap: 52px; }
+      .preview { order: -1; }
+      .value .grid { grid-template-columns: repeat(2, 1fr); }
+      .problem .wrap { grid-template-columns: 1fr; gap: 40px; }
+      .features .grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
     }
     @media (max-width: 480px) {
-      .feat-row { grid-template-columns: 1fr; }
+      section.block { padding: 70px 0; }
+      .value { padding: 48px 0; }
+      .value .grid { grid-template-columns: 1fr; }
+      .final .panel { padding: 52px 22px; }
       .stores { justify-content: flex-start; }
     }
-    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; transition: none !important; } }
   </style>
 </head>
 <body>
 
-  <!-- ===== HEADER ===== -->
+  <!-- ===== 1. HEADER ===== -->
   <header>
     <div class="wrap nav">
-      <a class="logo" href="#" aria-label="Lzaz Sports home">
-        <span class="logo-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 6.5l3.2 2.3-1.2 3.7h-4L8.8 8.8 12 6.5z" fill="currentColor"/></svg>
-        </span>
-        Lzaz<span>.</span>
+      <a class="logo" href="#top" aria-label="Lzaz Sports home">
+        <svg class="logo-mark" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M24 2l4.2 3.3 5.2-1.2 2.4 4.8 5.2 1.3.1 5.3 4 3.5-2.2 4.9 2.2 4.9-4 3.5-.1 5.3-5.2 1.3-2.4 4.8-5.2-1.2L24 46l-4.2-3.3-5.2 1.2-2.4-4.8-5.2-1.3-.1-5.3-4-3.5 2.2-4.9-2.2-4.9 4-3.5.1-5.3 5.2-1.3 2.4-4.8 5.2 1.2L24 2z" fill="#FFD23F"/>
+          <circle cx="24" cy="24" r="13" fill="none" stroke="#252522" stroke-width="2"/>
+          <path d="M24 15l7 5-2.7 8.2h-8.6L17 20l7-5z" fill="#252522"/>
+        </svg>
+        <span class="logo-text"><b>Lzaz</b><span>Sports</span></span>
       </a>
-      <a href="#get" class="btn">Get the app</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+      </nav>
+      <a href="#download" class="btn">Download App</a>
     </div>
   </header>
 
-  <!-- ===== HERO = whole page ===== -->
-  <main class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="wrap">
-      <div class="hero-copy">
-        <span class="eyebrow"><span class="dot"></span> Football, organised</span>
-        <h1>Your next football match is <em>already nearby.</em></h1>
-        <p class="sub">Lzaz Sports helps players create matches, find nearby footballers, build teams, and challenge rivals — all in one simple app.</p>
+  <main id="top">
 
-        <div class="ctas" id="get">
-          <div class="stores">
-            <a class="store" href="https://apps.apple.com/app/id1475395999" aria-label="Download on the App Store">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 1.5c0 1.1-.4 2.1-1.2 3-.8.9-1.8 1.5-2.9 1.4-.1-1.1.4-2.2 1.1-3 .8-.9 2-1.5 3-1.4zM20.3 17c-.5 1.2-.8 1.7-1.4 2.7-1 1.5-2.3 3.4-4 3.4-1.5 0-1.9-1-3.9-1-2 0-2.4 1-3.9 1-1.7 0-2.9-1.7-3.9-3.2-2.8-4.2-3.1-9.2-1.4-11.8 1.2-1.9 3.1-3 4.9-3 1.8 0 2.9 1 4.4 1 1.4 0 2.3-1 4.4-1 1.6 0 3.2.9 4.4 2.4-3.9 2.1-3.2 7.6.3 9.5z"/></svg>
-              <span class="lbl"><small>Download on the</small><b>App Store</b></span>
-            </a>
-            <a class="store" href="https://play.google.com/store/apps/details?id=com.lzazsports.lzazapp" aria-label="Get it on Google Play">
-              <svg viewBox="0 0 24 24"><path fill="#00E676" d="M3.6 2.3 13.3 12 3.6 21.7c-.4-.2-.6-.6-.6-1.1V3.4c0-.5.2-.9.6-1.1z"/><path fill="#00C2FF" d="M16.8 8.5 13.3 12 3.6 2.3c.1 0 .2-.1.3-.1.3-.1.6 0 .9.2l12 6.1z"/><path fill="#FF5252" d="M16.8 15.5 4.8 21.6c-.3.2-.6.3-.9.2-.1 0-.2 0-.3-.1L13.3 12l3.5 3.5z"/><path fill="#FFD740" d="M20.5 11.1c.4.2.6.5.6.9s-.2.7-.6.9l-3.7 1.9L13.3 12l3.5-3.5 3.7 2.6z"/></svg>
-              <span class="lbl"><small>Get it on</small><b>Google Play</b></span>
-            </a>
-          </div>
-        </div>
-
-        <div class="feat-row">
-          <div class="feat">
-            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v8M8 12h8" stroke-linecap="round"/><circle cx="12" cy="12" r="9"/></svg></span>
-            <span><b>Create matches</b><small>Set a game up in seconds</small></span>
-          </div>
-          <div class="feat">
-            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 11-9 11s-9-5-9-11a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-            <span><b>Find players</b><small>Discover footballers nearby</small></span>
-          </div>
-          <div class="feat">
-            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0112 0M16 6a3 3 0 010 6M19 20a5 5 0 00-3-4.5" stroke-linecap="round"/></svg></span>
-            <span><b>Build your team</b><small>Manage your squad &amp; record</small></span>
-          </div>
-          <div class="feat">
-            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 01-10 0V4zM7 6H4v2a3 3 0 003 3M17 6h3v2a3 3 0 01-3 3"/></svg></span>
-            <span><b>Challenge rivals</b><small>Turn it into competition</small></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="phone-stage" aria-hidden="true">
-        <div class="glow-ball"></div>
-        <div class="phone">
-          <div class="notch"></div>
-          <div class="screen">
-            <div class="screen-top">
-              <div class="hi">Good evening</div>
-              <div class="name">Let's play ⚽</div>
+    <!-- ===== 2. HERO ===== -->
+    <section class="hero">
+      <div class="pitch" aria-hidden="true"></div>
+      <div class="burst" aria-hidden="true"></div>
+      <div class="center-circle" aria-hidden="true"></div>
+      <div class="wrap">
+        <div class="hero-copy">
+          <span class="eyebrow">Lzaz Sports</span>
+          <h1>Find your <span class="y">next match.</span></h1>
+          <p class="sub">Create pickup games, find nearby players, build your team, and challenge rivals — all from one simple football app.</p>
+          <div class="ctas">
+            <div class="stores">
+              <a class="store solid" href="https://apps.apple.com/app/id1475395999" aria-label="Download on the App Store">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 1.5c0 1.1-.4 2.1-1.2 3-.8.9-1.8 1.5-2.9 1.4-.1-1.1.4-2.2 1.1-3 .8-.9 2-1.5 3-1.4zM20.3 17c-.5 1.2-.8 1.7-1.4 2.7-1 1.5-2.3 3.4-4 3.4-1.5 0-1.9-1-3.9-1-2 0-2.4 1-3.9 1-1.7 0-2.9-1.7-3.9-3.2-2.8-4.2-3.1-9.2-1.4-11.8 1.2-1.9 3.1-3 4.9-3 1.8 0 2.9 1 4.4 1 1.4 0 2.3-1 4.4-1 1.6 0 3.2.9 4.4 2.4-3.9 2.1-3.2 7.6.3 9.5z"/></svg>
+                <span class="lbl"><small>Download on the</small><b>App Store</b></span>
+              </a>
+              <a class="store line" href="https://play.google.com/store/apps/details?id=com.lzazsports.lzazapp" aria-label="Get it on Google Play">
+                <svg viewBox="0 0 24 24"><path fill="#FFD23F" d="M3.6 2.3 13.3 12 3.6 21.7c-.4-.2-.6-.6-.6-1.1V3.4c0-.5.2-.9.6-1.1z"/><path fill="#FAF9F3" d="M16.8 8.5 13.3 12 3.6 2.3c.1 0 .2-.1.3-.1.3-.1.6 0 .9.2l12 6.1z"/><path fill="#9A8A3A" d="M16.8 15.5 4.8 21.6c-.3.2-.6.3-.9.2-.1 0-.2 0-.3-.1L13.3 12l3.5 3.5z"/><path fill="#FFD23F" d="M20.5 11.1c.4.2.6.5.6.9s-.2.7-.6.9l-3.7 1.9L13.3 12l3.5-3.5 3.7 2.6z"/></svg>
+                <span class="lbl"><small>Get it on</small><b>Google Play</b></span>
+              </a>
             </div>
-            <div class="match-card">
-              <div class="when">Tonight · 8:00 PM</div>
-              <div class="title">5-a-side @ Aspire Pitch 3</div>
-              <div class="row">
-                <span class="avatars"><i></i><i></i><i></i><i></i></span>
-                <span class="pill">2 spots left</span>
+          </div>
+          <div class="trust">
+            <span class="stars" aria-hidden="true">★★★★★</span>
+            <span>Built for local footballers across the region</span>
+          </div>
+        </div>
+
+        <div class="preview" aria-hidden="true">
+          <div class="ring"></div>
+          <div class="phone">
+            <div class="app-head">
+              <div class="who"><small>Good evening</small><b>Let's play</b></div>
+              <svg class="badge-ic" viewBox="0 0 48 48"><path d="M24 3l3.6 2.8 4.5-1 2 4.1 4.5 1.1.1 4.6 3.4 3-1.9 4.2 1.9 4.2-3.4 3-.1 4.6-4.5 1.1-2 4.1-4.5-1L24 45l-3.6-2.8-4.5 1-2-4.1-4.5-1.1-.1-4.6-3.4-3 1.9-4.2-1.9-4.2 3.4-3 .1-4.6 4.5-1.1 2-4.1 4.5 1L24 3z" fill="#FFD23F"/><circle cx="24" cy="24" r="11" fill="none" stroke="#252522" stroke-width="2"/></svg>
+            </div>
+            <div class="tonight">
+              <div class="banner"><span>Tonight's Match</span><span>8:00 PM</span></div>
+              <div class="body">
+                <div class="ttl">8v8 Football</div>
+                <div class="meta">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 11-9 11s-9-5-9-11a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  Aspire Zone
+                </div>
+                <div class="joined">
+                  <span class="avatars"><i></i><i></i><i></i><i></i><span class="more">+2</span></span>
+                  <span class="lbl2">6 players joined</span>
+                </div>
+                <div class="challenge-btn">Challenge Team</div>
               </div>
             </div>
-            <div class="mini-card"><span>Nearby players</span><span class="badge">12 online</span></div>
-            <div class="mini-card"><span>Your team · Falcons FC</span><span class="badge">W 7 · D 2</span></div>
-            <div class="mini-card"><span>Open challenge</span><span class="badge">Accept →</span></div>
-            <div class="screen-nav"><i class="active"></i><i></i><i></i><i></i></div>
+            <div class="app-nav"><i class="on"></i><i></i><i></i><i></i></div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- ===== 3. VALUE STRIP ===== -->
+    <section class="value">
+      <div class="wrap">
+        <div class="grid">
+          <div class="vcard">
+            <span class="b-ic"><svg viewBox="0 0 52 52" fill="none"><path d="M26 4l5 4 6.2-1.3 2.7 5.7 6.2 1.6v6.4l4.6 4.6-4.6 4.6v6.4l-6.2 1.6-2.7 5.7L31 44l-5 4-5-4-6.2 1.3-2.7-5.7L5.9 38v-6.4L1.3 27l4.6-4.6v-6.4l6.2-1.6 2.7-5.7L21 8l5-4z" fill="#FFD23F"/><path d="M26 16v20M16 26h20" stroke="#252522" stroke-width="3" stroke-linecap="round"/></svg></span>
+            <h3>Matches</h3>
+            <p>Spin up a game in seconds.</p>
+          </div>
+          <div class="vcard">
+            <span class="b-ic"><svg viewBox="0 0 52 52" fill="none"><path d="M26 4l5 4 6.2-1.3 2.7 5.7 6.2 1.6v6.4l4.6 4.6-4.6 4.6v6.4l-6.2 1.6-2.7 5.7L31 44l-5 4-5-4-6.2 1.3-2.7-5.7L5.9 38v-6.4L1.3 27l4.6-4.6v-6.4l6.2-1.6 2.7-5.7L21 8l5-4z" fill="#FFD23F"/><g stroke="#252522" stroke-width="3" fill="none" stroke-linecap="round"><circle cx="26" cy="21" r="5"/><path d="M17 38a9 9 0 0118 0"/></g></svg></span>
+            <h3>Players</h3>
+            <p>Find footballers nearby.</p>
+          </div>
+          <div class="vcard">
+            <span class="b-ic"><svg viewBox="0 0 52 52" fill="none"><path d="M26 4l5 4 6.2-1.3 2.7 5.7 6.2 1.6v6.4l4.6 4.6-4.6 4.6v6.4l-6.2 1.6-2.7 5.7L31 44l-5 4-5-4-6.2 1.3-2.7-5.7L5.9 38v-6.4L1.3 27l4.6-4.6v-6.4l6.2-1.6 2.7-5.7L21 8l5-4z" fill="#FFD23F"/><g stroke="#252522" stroke-width="3" fill="none" stroke-linecap="round"><circle cx="20" cy="22" r="4"/><circle cx="32" cy="22" r="4"/><path d="M13 37a7 7 0 0114 0M25 37a7 7 0 0114 0"/></g></svg></span>
+            <h3>Teams</h3>
+            <p>Build and manage your squad.</p>
+          </div>
+          <div class="vcard">
+            <span class="b-ic"><svg viewBox="0 0 52 52" fill="none"><path d="M26 4l5 4 6.2-1.3 2.7 5.7 6.2 1.6v6.4l4.6 4.6-4.6 4.6v6.4l-6.2 1.6-2.7 5.7L31 44l-5 4-5-4-6.2 1.3-2.7-5.7L5.9 38v-6.4L1.3 27l4.6-4.6v-6.4l6.2-1.6 2.7-5.7L21 8l5-4z" fill="#FFD23F"/><g stroke="#252522" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M19 40h14M26 33v7M18 12h16v8a8 8 0 01-16 0v-8zM18 15h-4v3a4 4 0 004 4M34 15h4v3a4 4 0 01-4 4"/></g></svg></span>
+            <h3>Challenges</h3>
+            <p>Take on rival teams.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 4. PROBLEM ===== -->
+    <section class="block problem">
+      <div class="wrap">
+        <div>
+          <h2>No more messy football <span class="u">group chats.</span></h2>
+          <p>Finding players, confirming attendance, sharing locations, and managing teams should feel simple. Lzaz brings your local football community into one clean, organized app.</p>
+        </div>
+        <div class="chat" role="img" aria-label="A chaotic group chat replaced by Lzaz">
+          <div class="bubble">anyone free for footy tonight??</div>
+          <div class="bubble me">maybe… what time?</div>
+          <div class="bubble dim">where's the pitch again 😅</div>
+          <div class="bubble">we 3 short, need players!!</div>
+          <div class="bubble dim">who's bringing the bibs</div>
+          <div class="tagline">…47 more messages</div>
+          <div class="solved">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            One tap on Lzaz — match created, players invited, done.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. FEATURES ===== -->
+    <section class="block features" id="features">
+      <div class="wrap">
+        <div class="head">
+          <span class="tag">Features</span>
+          <h2>Everything you need to play.</h2>
+        </div>
+        <div class="grid">
+          <div class="fcard">
+            <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M8 2v4M16 2v4M12 13v4M10 15h4" stroke-linecap="round"/></svg></span>
+            <h3>Create matches</h3>
+            <p>Set up a game in seconds, choose a venue, and invite players to join.</p>
+          </div>
+          <div class="fcard">
+            <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4" stroke-linecap="round"/><circle cx="11" cy="11" r="2.2"/></svg></span>
+            <h3>Find players</h3>
+            <p>Discover nearby footballers and connect when your squad is short.</p>
+          </div>
+          <div class="fcard">
+            <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0111 0M17 6.5a3 3 0 010 5.8M21 20a5 5 0 00-3.5-4.8" stroke-linecap="round"/></svg></span>
+            <h3>Build your team</h3>
+            <p>Manage your squad, track wins, draws, and losses, and keep your team active.</p>
+          </div>
+          <div class="fcard">
+            <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 01-10 0V4zM7 6H4v2a3 3 0 003 3M17 6h3v2a3 3 0 01-3 3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <h3>Challenge rivals</h3>
+            <p>Challenge other teams and turn local football into proper competition.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 6. HOW IT WORKS ===== -->
+    <section class="block how" id="how">
+      <div class="wrap">
+        <div class="head">
+          <span class="tag">How it works</span>
+          <h2>Kickoff in three steps.</h2>
+        </div>
+        <div class="steps">
+          <div class="step"><div class="num">1</div><h3>Create or join a match</h3></div>
+          <div class="step"><div class="num">2</div><h3>Invite players and teams</h3></div>
+          <div class="step"><div class="num">3</div><h3>Play, compete, and repeat</h3></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 7. FINAL CTA ===== -->
+    <section class="final" id="download">
+      <div class="wrap">
+        <div class="panel">
+          <div class="pitch2" aria-hidden="true"></div>
+          <h2>Ready to get on the pitch?</h2>
+          <p>Download Lzaz Sports and find your next match today.</p>
+          <div class="ctas">
+            <div class="stores">
+              <a class="store dark" href="https://apps.apple.com/app/id1475395999" aria-label="Download on the App Store">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 1.5c0 1.1-.4 2.1-1.2 3-.8.9-1.8 1.5-2.9 1.4-.1-1.1.4-2.2 1.1-3 .8-.9 2-1.5 3-1.4zM20.3 17c-.5 1.2-.8 1.7-1.4 2.7-1 1.5-2.3 3.4-4 3.4-1.5 0-1.9-1-3.9-1-2 0-2.4 1-3.9 1-1.7 0-2.9-1.7-3.9-3.2-2.8-4.2-3.1-9.2-1.4-11.8 1.2-1.9 3.1-3 4.9-3 1.8 0 2.9 1 4.4 1 1.4 0 2.3-1 4.4-1 1.6 0 3.2.9 4.4 2.4-3.9 2.1-3.2 7.6.3 9.5z"/></svg>
+                <span class="lbl"><small>Download on the</small><b>App Store</b></span>
+              </a>
+              <a class="store dark" href="https://play.google.com/store/apps/details?id=com.lzazsports.lzazapp" aria-label="Get it on Google Play">
+                <svg viewBox="0 0 24 24"><path fill="#FFD23F" d="M3.6 2.3 13.3 12 3.6 21.7c-.4-.2-.6-.6-.6-1.1V3.4c0-.5.2-.9.6-1.1z"/><path fill="#FAF9F3" d="M16.8 8.5 13.3 12 3.6 2.3c.1 0 .2-.1.3-.1.3-.1.6 0 .9.2l12 6.1z"/><path fill="#9A8A3A" d="M16.8 15.5 4.8 21.6c-.3.2-.6.3-.9.2-.1 0-.2 0-.3-.1L13.3 12l3.5 3.5z"/><path fill="#FFD23F" d="M20.5 11.1c.4.2.6.5.6.9s-.2.7-.6.9l-3.7 1.9L13.3 12l3.5-3.5 3.7 2.6z"/></svg>
+                <span class="lbl"><small>Get it on</small><b>Google Play</b></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- ===== FOOTER ===== -->
+  <!-- ===== 8. FOOTER ===== -->
   <footer>
-    <div class="wrap foot">
-      <span>© 2026 Lzaz Technology Company</span>
-      <nav class="foot-links" aria-label="Legal">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="delete-account.html">Delete Account</a>
-        <a href="mailto:support@lzazsports.com">support@lzazsports.com</a>
-      </nav>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="footer-brand">
+          <a class="logo" href="#top">
+            <svg class="logo-mark" viewBox="0 0 48 48" aria-hidden="true">
+              <path d="M24 2l4.2 3.3 5.2-1.2 2.4 4.8 5.2 1.3.1 5.3 4 3.5-2.2 4.9 2.2 4.9-4 3.5-.1 5.3-5.2 1.3-2.4 4.8-5.2-1.2L24 46l-4.2-3.3-5.2 1.2-2.4-4.8-5.2-1.3-.1-5.3-4-3.5 2.2-4.9-2.2-4.9 4-3.5.1-5.3 5.2-1.3 2.4-4.8 5.2 1.2L24 2z" fill="#FFD23F"/>
+              <circle cx="24" cy="24" r="13" fill="none" stroke="#252522" stroke-width="2"/>
+              <path d="M24 15l7 5-2.7 8.2h-8.6L17 20l7-5z" fill="#252522"/>
+            </svg>
+            <span class="logo-text"><b>Lzaz</b><span>Sports</span></span>
+          </a>
+          <p>Lzaz Technology Company. The home for your local game.</p>
+        </div>
+        <div class="foot-cols">
+          <div class="foot-col">
+            <h4>Get the app</h4>
+            <a href="https://apps.apple.com/app/id1475395999">App Store</a>
+            <a href="https://play.google.com/store/apps/details?id=com.lzazsports.lzazapp">Google Play</a>
+          </div>
+          <div class="foot-col">
+            <h4>Legal</h4>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="delete-account.html">Delete Account</a>
+          </div>
+          <div class="foot-col">
+            <h4>Support</h4>
+            <a href="mailto:support@lzazsports.com">support@lzazsports.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="foot-bottom">© 2026 Lzaz Technology Company. All rights reserved.</div>
     </div>
   </footer>
 
